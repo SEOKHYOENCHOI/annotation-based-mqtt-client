@@ -1,6 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.9'
+    }
+}
+
 plugins {
     id 'java'
 }
+
+apply plugin: 'com.novoda.bintray-release'
 
 group 'shchoi'
 version '1.0.0'
@@ -9,6 +20,15 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+publish {
+    userOrg = 'seokhyoenchoi'
+    groupId = 'shchoi'
+    artifactId = 'annotation-based-mqtt-client'
+    publishVersion = '1.0.0'
+    desc = 'Java Annotation-based Mqtt Client with Spring boot and Spring Integration Mqtt'
+    website = 'https://github.com/SEOKHYOENCHOI/annotation-based-mqtt-client'
 }
 
 dependencies {
