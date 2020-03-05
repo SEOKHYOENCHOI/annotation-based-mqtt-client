@@ -12,4 +12,11 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.integration:spring-integration-mqtt:5.2.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.2.3.RELEASE'
+
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.3.RELEASE'
 }

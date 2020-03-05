@@ -1,0 +1,14 @@
+mqtt:
+  clientId: client1
+  properties:
+    userName: user1
+    password: password1
+    connectionTimeout: 10
+    automaticReconnect: true
+    willTopic: /topic
+    endpoints: ssl://example.site.1.com:8883, ssl://example.site.2.com:8883
+
+#    also
+#    endpoints:
+#      - ssl://example.site.1.com:8883
+#      - ssl://example.site.2.com:8883
