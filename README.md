@@ -1,8 +1,24 @@
 # Annotation Based Mqtt Client
 
 ## Usage
+#### Dependency 추가
+```
+...
+
+repositories {
+    jcenter()
+    ...
+}
+
+dependencies {
+    implementation 'shchoi:annotation-based-mqtt-client:1.0.1'
+    ...
+...
+```
+
 #### application.yml 설정
 * [Sample](https://github.com/SEOKHYOENCHOI/annotation-based-mqtt-client/blob/master/src/test/resources/application.yml) 
+
 
 #### Properties
 ```yaml
