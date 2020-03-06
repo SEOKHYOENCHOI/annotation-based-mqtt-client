@@ -1,7 +1,5 @@
 package shchoi.mqtt.config;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 import java.lang.reflect.Field;
@@ -12,8 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter // @Setter for org.springframework.boot.context.properties.ConfigurationProperties
 public class MqttProperties {
     private static final String SETTER_PREFIX = "set";
     private static final String WILL_PREFIX = "will";
@@ -113,5 +109,109 @@ public class MqttProperties {
 
     private boolean isNotExcludedField(Field field){
         return !"endpoints".equals(field.getName()) && !"password".equals(field.getName());
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Integer getKeepAliveInterval() {
+        return keepAliveInterval;
+    }
+
+    public void setKeepAliveInterval(Integer keepAliveInterval) {
+        this.keepAliveInterval = keepAliveInterval;
+    }
+
+    public Boolean getCleanSession() {
+        return cleanSession;
+    }
+
+    public void setCleanSession(Boolean cleanSession) {
+        this.cleanSession = cleanSession;
+    }
+
+    public Boolean getAutomaticReconnect() {
+        return automaticReconnect;
+    }
+
+    public void setAutomaticReconnect(Boolean automaticReconnect) {
+        this.automaticReconnect = automaticReconnect;
+    }
+
+    public Integer getMaxInflight() {
+        return maxInflight;
+    }
+
+    public void setMaxInflight(Integer maxInflight) {
+        this.maxInflight = maxInflight;
+    }
+
+    public Integer getMqttVersion() {
+        return mqttVersion;
+    }
+
+    public void setMqttVersion(Integer mqttVersion) {
+        this.mqttVersion = mqttVersion;
+    }
+
+    public String getWillTopic() {
+        return willTopic;
+    }
+
+    public void setWillTopic(String willTopic) {
+        this.willTopic = willTopic;
+    }
+
+    public String getWillPayload() {
+        return willPayload;
+    }
+
+    public void setWillPayload(String willPayload) {
+        this.willPayload = willPayload;
+    }
+
+    public Integer getWillQos() {
+        return willQos;
+    }
+
+    public void setWillQos(Integer willQos) {
+        this.willQos = willQos;
+    }
+
+    public Boolean getWillRetained() {
+        return willRetained;
+    }
+
+    public void setWillRetained(Boolean willRetained) {
+        this.willRetained = willRetained;
+    }
+
+    public List<String> getEndpoints() {
+        return endpoints;
+    }
+
+    public void setEndpoints(List<String> endpoints) {
+        this.endpoints = endpoints;
     }
 }

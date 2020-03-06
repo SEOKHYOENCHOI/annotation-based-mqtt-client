@@ -1,8 +1,6 @@
 package shchoi.mqtt.config;
 
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -24,13 +22,15 @@ import java.util.Objects;
 
 @Configuration
 @ConfigurationProperties(prefix = "mqtt")
-@RequiredArgsConstructor
 public class MqttIntegrationConfig {
-    @Setter
     private MqttProperties properties;
-    @Setter
     private String clientId;
+
     private final MqttMessageDispatcher messageDispatcher;
+
+    public MqttIntegrationConfig(MqttMessageDispatcher messageDispatcher) {
+        this.messageDispatcher = messageDispatcher;
+    }
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -78,5 +78,13 @@ public class MqttIntegrationConfig {
     @Bean
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();
+    }
+
+    public void setProperties(MqttProperties properties) {
+        this.properties = properties;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

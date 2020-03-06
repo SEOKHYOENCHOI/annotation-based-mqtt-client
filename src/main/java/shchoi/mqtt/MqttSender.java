@@ -1,6 +1,5 @@
 package shchoi.mqtt;
 
-import lombok.RequiredArgsConstructor;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.MqttHeaders;
@@ -9,13 +8,16 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class MqttSender {
     private static final int DEFAULT_QOS = 1;
     private static final boolean DEFAULT_RETAINED = false;
     private static final boolean PUBLISH_TOPIC_WILDCARD_ALLOWED = false;
 
     private final MqttPahoMessageHandler messageHandler;
+
+    public MqttSender(MqttPahoMessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
 
     public <T> void sendMessage(String topic, T payload) {
         sendMessage(topic, payload, DEFAULT_QOS, DEFAULT_RETAINED);
