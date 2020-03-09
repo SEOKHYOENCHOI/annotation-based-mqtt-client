@@ -19,7 +19,7 @@ public class MqttController {
     }
 
     @MqttListener(topic = "/example/{topicVariable}/a")
-    public void subscribeWithWildCard(String payload, @TopicVariable String topicVariable) {
+    public void subscribeWithWildCard(String payload, @TopicVariable("topicVariable") String topicVariable) {
 //        log.info(payload);
 //        log.info(topicVariable);
     }
@@ -27,8 +27,8 @@ public class MqttController {
     @MqttListener(topic = "/{firstVariable}/{secondVariable}/a")
     public void subscribeWithMultipleWildCard(
             String payload,
-            @TopicVariable String firstVariable,
-            @TopicVariable String secondVariable) {
+            @TopicVariable("firstVariable") String firstVariable,
+            @TopicVariable("secondVariable") String secondVariable) {
 //        log.info(payload);
 //        log.info(firstVariable);
 //        log.info(secondVariable);
