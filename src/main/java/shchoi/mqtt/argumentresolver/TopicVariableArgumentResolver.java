@@ -1,6 +1,5 @@
 package shchoi.mqtt.argumentresolver;
 
-import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.Message;
 import shchoi.mqtt.annotation.TopicVariable;
@@ -21,7 +20,7 @@ public class TopicVariableArgumentResolver implements MqttArgumentResolver {
         Objects.requireNonNull(publishedTopic, "received topic is null");
 
         TopicVariable topicVariable = parameter.getAnnotation(TopicVariable.class);
-        String variableName = topicVariable.name();
+        String variableName = topicVariable.value();
 
         return VariableTopicUtils.getTopicVariable(variableName, variableTopic, publishedTopic);
     }
