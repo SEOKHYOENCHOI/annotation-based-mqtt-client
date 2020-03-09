@@ -23,6 +23,7 @@ public class MqttMessageDispatcher {
             return;
         }
 
-        invokers.forEach(invoker -> invoker.invoke(message));
+        invokers.parallelStream()
+                .forEach(invoker -> invoker.invoke(message));
     }
 }

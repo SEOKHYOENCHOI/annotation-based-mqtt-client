@@ -12,7 +12,7 @@ public class RawPayloadArgumentResolver implements MqttArgumentResolver {
     }
 
     @Override
-    public Object resolve(Parameter parameter, Message message, String topic) {
+    public Object resolve(Parameter parameter, Message<?> message, String variableTopic) {
         return message.getPayload();
     }
 }

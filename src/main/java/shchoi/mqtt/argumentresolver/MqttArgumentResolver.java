@@ -7,5 +7,5 @@ import java.lang.reflect.Parameter;
 public interface MqttArgumentResolver {
     boolean supports(Parameter parameter);
 
-    Object resolve(Parameter parameter, Message message, String topic);
+    Object resolve(Parameter parameter, Message<?> message, String variableTopic);
 }

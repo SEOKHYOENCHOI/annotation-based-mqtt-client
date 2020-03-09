@@ -11,17 +11,19 @@ import java.util.Arrays;
 
 public class MqttListenerInvoker {
     private final String topic;
+    private final String variableTopic;
     private final Object object;
     private final Method method;
     private final MqttArgumentResolvers resolvers = new MqttArgumentResolvers();
 
-    public MqttListenerInvoker(String topic, Object object, Method method) {
+    public MqttListenerInvoker(String topic, String variableTopic, Object object, Method method) {
         this.topic = topic;
+        this.variableTopic = variableTopic;
         this.object = object;
         this.method = method;
     }
 
-    public void invoke(Message message) {
+    public void invoke(Message<?> message) {
         try {
             Object[] arguments = getArguments(message);
             method.invoke(object, arguments);
@@ -36,9 +38,13 @@ public class MqttListenerInvoker {
         return this.topic;
     }
 
-    private Object[] getArguments(Message message) {
+    public String getVariableTopic() {
+        return this.variableTopic;
+    }
+
+    private Object[] getArguments(Message<?> message) {
         return Arrays.stream(method.getParameters())
-                .map(parameter -> resolvers.resolve(parameter, message, topic))
+                .map(parameter -> resolvers.resolve(parameter, message, variableTopic))
                 .toArray();
     }
 }

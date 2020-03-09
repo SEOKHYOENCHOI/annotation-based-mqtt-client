@@ -21,11 +21,11 @@ public class MqttArgumentResolvers {
         this.resolvers.add(new MappingPayloadArgumentResolver());
     }
 
-    public Object resolve(Parameter parameter, Message message, String topic) {
+    public Object resolve(Parameter parameter, Message<?> message, String variableTopic) {
         return resolvers.stream()
                 .filter(resolver -> resolver.supports(parameter))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 resolver를 찾지 못했습니다."))
-                .resolve(parameter, message, topic);
+                .resolve(parameter, message, variableTopic);
     }
 }

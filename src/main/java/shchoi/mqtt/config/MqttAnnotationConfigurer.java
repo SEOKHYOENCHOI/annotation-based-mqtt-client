@@ -9,6 +9,7 @@ import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannel
 import org.springframework.util.StringUtils;
 import shchoi.mqtt.MqttListenerRegistry;
 import shchoi.mqtt.annotation.MqttListener;
+import shchoi.mqtt.util.VariableTopicUtils;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -41,12 +42,14 @@ public class MqttAnnotationConfigurer implements ApplicationContextAware {
     private void addTopic(Object object, Method method) {
         MqttListener mqttListener = method.getAnnotation(MqttListener.class);
 
-        String topic = mqttListener.topic();
-        if (StringUtils.isEmpty(topic)) {
+        String variableTopic = mqttListener.topic();
+        if (StringUtils.isEmpty(variableTopic)) {
             return;
         }
 
-        registry.register(topic, object, method);
+        String topic = VariableTopicUtils.toWildcardTopic(variableTopic);
+
+        registry.register(topic, variableTopic, object, method);
         if (!Arrays.asList(adapter.getTopic()).contains(topic)) {
             adapter.addTopic(topic, mqttListener.qos());
         }
