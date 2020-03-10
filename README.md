@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'shchoi:annotation-based-mqtt-client:1.0.1'
+    implementation 'shchoi:annotation-based-mqtt-client:1.0.2'
     ...
 ...
 ```
