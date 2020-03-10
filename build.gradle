@@ -26,7 +26,7 @@ publish {
     userOrg = 'seokhyoenchoi'
     groupId = 'shchoi'
     artifactId = 'annotation-based-mqtt-client'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'Java Annotation-based Mqtt Client with Spring boot and Spring Integration Mqtt'
     website = 'https://github.com/SEOKHYOENCHOI/annotation-based-mqtt-client'
 }
