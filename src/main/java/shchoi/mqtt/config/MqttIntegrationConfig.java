@@ -34,7 +34,7 @@ public class MqttIntegrationConfig {
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
-        if(Objects.isNull(clientId)) {
+        if (Objects.isNull(clientId)) {
             clientId = "Client";
         }
 
@@ -46,7 +46,6 @@ public class MqttIntegrationConfig {
         factory.setConnectionOptions(options);
         return factory;
     }
-
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {

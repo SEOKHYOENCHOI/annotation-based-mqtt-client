@@ -14,13 +14,14 @@ public class MqttListenerInvoker {
     private final String variableTopic;
     private final Object object;
     private final Method method;
-    private final MqttArgumentResolvers resolvers = new MqttArgumentResolvers();
+    private final MqttArgumentResolvers resolvers;
 
-    public MqttListenerInvoker(String topic, String variableTopic, Object object, Method method) {
+    public MqttListenerInvoker(String topic, String variableTopic, Object object, Method method, MqttArgumentResolvers resolvers) {
         this.topic = topic;
         this.variableTopic = variableTopic;
         this.object = object;
         this.method = method;
+        this.resolvers = resolvers;
     }
 
     public void invoke(Message<?> message) {
