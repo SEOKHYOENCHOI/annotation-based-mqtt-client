@@ -7,7 +7,7 @@ public final class VariableTopicUtils {
     }
 
     public static String toWildcardTopic(String variableTopic) {
-        return variableTopic.replaceAll("\\{[a-zA-Z]*\\}", "+");
+        return variableTopic.replaceAll("\\{[a-zA-Z0-9]*\\}", "+");
     }
 
     public static String getTopicVariable(
