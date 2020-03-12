@@ -1,6 +1,7 @@
 package shchoi.mqtt.config;
 
 
+import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -34,11 +35,7 @@ public class MqttIntegrationConfig {
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
-        if (Objects.isNull(clientId)) {
-            clientId = "Client";
-        }
-
-        clientId += "-" + System.nanoTime();
+        clientId = generateClientId();
 
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = properties.createConnectOptions();
@@ -46,6 +43,7 @@ public class MqttIntegrationConfig {
         factory.setConnectionOptions(options);
         return factory;
     }
+
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
@@ -77,6 +75,14 @@ public class MqttIntegrationConfig {
     @Bean
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();
+    }
+
+    private String generateClientId() {
+        if (Objects.isNull(clientId)) {
+            return MqttClient.generateClientId();
+        }
+
+        return clientId + System.nanoTime();
     }
 
     public void setProperties(MqttProperties properties) {

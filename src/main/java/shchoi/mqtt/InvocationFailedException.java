@@ -1,4 +1,4 @@
-package shchoi.mqtt.config;
+package shchoi.mqtt;
 
 public class InvocationFailedException extends RuntimeException {
     public InvocationFailedException(String message) {

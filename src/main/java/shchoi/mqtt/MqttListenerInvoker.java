@@ -2,7 +2,6 @@ package shchoi.mqtt;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.converter.MessageConversionException;
-import shchoi.mqtt.config.InvocationFailedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -14,9 +14,11 @@ public class MqttSender {
     private static final boolean PUBLISH_TOPIC_WILDCARD_ALLOWED = false;
 
     private final MqttPahoMessageHandler messageHandler;
+    private final MessageMapper messageMapper;
 
-    public MqttSender(MqttPahoMessageHandler messageHandler) {
+    public MqttSender(MqttPahoMessageHandler messageHandler, MessageMapper messageMapper) {
         this.messageHandler = messageHandler;
+        this.messageMapper = messageMapper;
     }
 
     public <T> void sendMessage(String topic, T payload) {
@@ -39,7 +41,7 @@ public class MqttSender {
         accessor.setHeader(MqttHeaders.QOS, qos);
         accessor.setHeader(MqttHeaders.RETAINED, retained);
 
-        Message message = MessageMapper.mapToMessage(payload, accessor.toMessageHeaders());
+        Message message = messageMapper.mapToMessage(payload, accessor.toMessageHeaders());
 
         messageHandler.handleMessage(message);
     }
