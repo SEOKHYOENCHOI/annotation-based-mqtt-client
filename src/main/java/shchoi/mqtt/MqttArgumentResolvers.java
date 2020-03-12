@@ -1,24 +1,25 @@
 package shchoi.mqtt;
 
+import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.Message;
-import shchoi.mqtt.argumentresolver.MappingPayloadArgumentResolver;
-import shchoi.mqtt.argumentresolver.MqttArgumentResolver;
-import shchoi.mqtt.argumentresolver.RawPayloadArgumentResolver;
-import shchoi.mqtt.argumentresolver.TopicVariableArgumentResolver;
+import org.springframework.stereotype.Component;
+import shchoi.mqtt.argumentresolver.*;
 
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MqttArgumentResolvers {
     private final List<MqttArgumentResolver> resolvers;
 
-    public MqttArgumentResolvers() {
+    public MqttArgumentResolvers(MessageMapper messageMapper) {
         this.resolvers = new ArrayList<>();
 
         this.resolvers.add(new TopicVariableArgumentResolver());
         this.resolvers.add(new RawPayloadArgumentResolver());
-        this.resolvers.add(new MappingPayloadArgumentResolver());
+        this.resolvers.add(new MappingPayloadArgumentResolver(messageMapper));
+        this.resolvers.add(new MqttMessageArgumentResolver(new DefaultPahoMessageConverter()));
     }
 
     public Object resolve(Parameter parameter, Message<?> message, String variableTopic) {

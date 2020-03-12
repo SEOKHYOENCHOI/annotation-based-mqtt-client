@@ -2,7 +2,6 @@ package shchoi.mqtt;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.converter.MessageConversionException;
-import shchoi.mqtt.config.InvocationFailedException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,13 +13,14 @@ public class MqttListenerInvoker {
     private final String variableTopic;
     private final Object object;
     private final Method method;
-    private final MqttArgumentResolvers resolvers = new MqttArgumentResolvers();
+    private final MqttArgumentResolvers resolvers;
 
-    public MqttListenerInvoker(String topic, String variableTopic, Object object, Method method) {
+    public MqttListenerInvoker(String topic, String variableTopic, Object object, Method method, MqttArgumentResolvers resolvers) {
         this.topic = topic;
         this.variableTopic = variableTopic;
         this.object = object;
         this.method = method;
+        this.resolvers = resolvers;
     }
 
     public void invoke(Message<?> message) {
