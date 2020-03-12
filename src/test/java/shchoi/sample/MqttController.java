@@ -43,11 +43,4 @@ public class MqttController {
 
         mqttSender.sendMessage(topic, person, qos, retained);
     }
-
-    private class Person {
-        private Long id;
-        private String name;
-        private String address;
-        private String email;
-    }
 }
